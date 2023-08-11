@@ -21,7 +21,7 @@ async def make_reqeust(prompt):
     async with aiohttp.ClientSession() as session:
         async with session.post(url, data=payload, headers=headers) as resp:
             result = await resp.json()
-        return result
+            return result
 
 
 async def get_result_by_message_id(message_id: str):
