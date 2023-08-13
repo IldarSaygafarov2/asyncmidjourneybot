@@ -23,9 +23,13 @@ async def generate_image_by_text_prompt(message: types.Message):
 
 
 @dp.message_handler(state="*")
-@rate_limit(5)
+@rate_limit(30)
 async def get_prompt_generate_img(message: types.Message):
     chat_id = message.from_user.id
+    await bot.send_message(chat_id,
+                           "<i>Ваша фотография генерируется, это может занять до одной минуты.</i> "
+                           "<b>Убедительая просьба не писать сообщения в течении минуты</b>",
+                           parse_mode="HTML")
     try:
         resp = await api.make_reqeust(prompt=message.text)
         if resp.get("isNaughty"):
