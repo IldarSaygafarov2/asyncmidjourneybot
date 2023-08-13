@@ -24,8 +24,9 @@ async def command_start(message: types.Message):
 async def command_help(message: types.Message):
     chat_id = message.chat.id
 
-    msg = """
+    msg = """<b>
 Приветствую тебя, дорогой пользователь.
+
 Данный бот служит для генерации изображений по вашему шаблону.
 
 Шаблон желательно писать на английском языке, для лучшей генерации фотографий по вашему примеру.
@@ -34,5 +35,6 @@ async def command_help(message: types.Message):
 и добавить описание именно для нее.
 
 Приятного использования!
+</b>
 """
-    await bot.send_message(chat_id, msg)
+    await bot.send_message(chat_id, msg, parse_mode="HTML")
