@@ -16,7 +16,7 @@ async def command_start(message: types.Message):
     first_name = message.from_user.first_name
 
     await bot.send_message(chat_id, f"Привет, {first_name}")
-    await bot.send_message(chat_id, "Выбери один из вариантов для генерации фотографии из представленных ниже",
+    await bot.send_message(chat_id, "Нажмите на кнопку ниже для генерации фотографии",
                            reply_markup=kb.start_menu())
 
 
