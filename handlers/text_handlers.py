@@ -14,7 +14,11 @@ async def generate_image_by_text_prompt(message: types.Message):
 <b>Рекомендация:</b>
 
 <i>Напишите ваш запрос на английском языке, для лучшей ее генерации с сохранением деталей.</i>
-""", parse_mode="HTML")
+<i>
+После генерации фотографии, вы можете скопировать её ссылку добавить в запрос и добавить для нее новое описание
+Таким образом вы измените фотографию, которую получили
+</i>
+""", parse_mode="HTML", reply_markup=types.ReplyKeyboardRemove())
     await states.PromptStates.PROMPT.set()
 
 
@@ -39,9 +43,3 @@ async def get_prompt_generate_img(message: types.Message):
     except Exception as e:
         print(e, e.__class__)
         await message.reply(f"Произошла ошибка попробуйте позже")
-
-
-@dp.message_handler(lambda msg: msg.text == "По фотографии")
-async def generate_image_by_img_and_prompt(message: types.Message):
-    chat_id = message.chat.id
-    await bot.send_message(chat_id, "Отправьте ссылку на фотографию и напишите ваш запрос для генерации")
