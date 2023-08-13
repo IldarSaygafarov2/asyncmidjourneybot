@@ -9,7 +9,7 @@ from keyboards import reply as kb
 logging.basicConfig(level=logging.INFO)
 
 
-@dp.message_handler(commands=["start"])
+@dp.message_handler(commands=["start"], state="*")
 @rate_limit(25, "/start")
 async def command_start(message: types.Message):
     chat_id = message.chat.id
