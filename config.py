@@ -5,6 +5,7 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 API_TOKEN = os.getenv("API_TOKEN")
+telegram_url = "https://api.telegram.org/file/bot{bot_token}/{file_path}"
 
 prompts = [
     "A noblewoman’s portrait inspired by the works of Renaissance painter, Leonardo da Vinci, with soft chiaroscuro lighting and detailed fabric textures",
