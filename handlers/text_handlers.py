@@ -8,7 +8,7 @@ from data.middlewares import rate_limit
 from keyboards import reply as kb
 
 
-@dp.message_handler(lambda msg: msg.text == "По тексту")
+@dp.message_handler(lambda msg: msg.text == "По тексту", state="*")
 async def generate_image_by_text_prompt(message: types.Message):
     chat_id = message.chat.id
     await bot.send_message(chat_id, "Напишите ваш шаблон для генерации фотографии")
@@ -24,7 +24,7 @@ async def generate_image_by_text_prompt(message: types.Message):
     await states.PromptStates.PROMPT.set()
 
 
-@dp.message_handler(lambda msg: msg.text == "По фотографии")
+@dp.message_handler(lambda msg: msg.text == "По фотографии", state="*")
 async def generate_image_by_image_prompt(message: types.Message):
     chat_id = message.chat.id
     await bot.send_message(chat_id, "Выберите фотографию и добавьте к ней описание!",
@@ -95,9 +95,10 @@ async def get_prompt_generate_img(message: types.Message):
                                    parse_mode="HTML")
             return
         generated = await api.get_result_by_message_id(resp["messageId"])
-
+        print(generated)
         if not generated["response"]["imageUrls"]:
             await bot.send_message(chat_id, "Что-то пошло не так, попробуйте снова!", reply_markup=kb.start_menu())
+
             return
         for img_url in generated["response"]["imageUrls"]:
             await bot.send_photo(chat_id, photo=img_url, caption=f"Ссылка на фотографию: {img_url}")
